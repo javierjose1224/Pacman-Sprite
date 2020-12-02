@@ -20,7 +20,6 @@ class sprite : public QObject, public QGraphicsItem
 public:
     explicit sprite(QObject *parent = nullptr);
     sprite(int r_, int x, int y);//
-
     QTimer * timer;
     QPixmap *pixmap;
     int getR() const;

@@ -10,17 +10,21 @@ CONFIG += c++11
 
 SOURCES += \
     fantasma.cpp \
+    health.cpp \
     main.cpp \
     mainwindow.cpp \
     moneda.cpp \
     paredes.cpp \
+    score.cpp \
     sprite.cpp
 
 HEADERS += \
     fantasma.h \
+    health.h \
     mainwindow.h \
     moneda.h \
     paredes.h \
+    score.h \
     sprite.h
 
 FORMS += \

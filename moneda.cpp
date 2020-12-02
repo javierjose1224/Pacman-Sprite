@@ -30,7 +30,7 @@ QRectF moneda::boundingRect() const
 void moneda::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     painter->drawPixmap(-ancho/2, -alto/2,*pixmap2,columnas,filas,ancho,alto);
-    setScale(0.32);
+    setScale(0.2);
 
 }
 

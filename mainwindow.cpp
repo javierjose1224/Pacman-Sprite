@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <sprite.h>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -13,16 +14,26 @@ MainWindow::MainWindow(QWidget *parent)
     alto=Desktop.height();
 
     scene = new QGraphicsScene(x,y,ancho,alto);
+    scene->setSceneRect(0,0,540,600);
     scene->setBackgroundBrush(Qt::black);
-    //scene->setBackgroundBrush(QPixmap(":/images/cosmos.jpg"));
+   // scene->setBackgroundBrush(QBrush(QImage(":/imagen/map.png")));
+
     ui->graphicsView->setScene(scene);
     personaje = new sprite();
-    scene->setSceneRect(0,0,540,600);
+
+    puntaje= new Score();
+    salud = new Health();
     scene->addItem(personaje);
     personaje->setPos(20,20);
     gosht = new fantasma();
     gosht->setPos(250,280);
     scene->addItem(gosht);
+    puntaje->setPos(-130,0);
+    scene->addItem(puntaje);
+    salud->setPos(-130,40);
+    scene->addItem(salud);
+
+
 
 {
 paredes2.append(new paredes(20,220,20,20));//left up
@@ -124,18 +135,16 @@ paredes2.append(new paredes(20,100,-260,20));//up
 
     timer = new QTimer();
     connect(timer,SIGNAL(timeout()),this,SLOT(moveEnemy()));
-    timer->start(8);
+    timer->start(17);
 
-
-//    for(auto it2=monedas.begin();it2!=monedas.end();it2++){
-//        scene->addItem(*it2);
-//    }
+    for(auto it2=monedas.begin();it2!=monedas.end();it2++){
+        scene->addItem(*it2);
+    }
 
     for(auto it=paredes2.begin();it!=paredes2.end();it++)
     {
         scene->addItem(*it);
     }
-
 }
 
 //void MainWindow::mover(){
@@ -149,24 +158,6 @@ paredes2.append(new paredes(20,100,-260,20));//up
 
 void MainWindow::keyPressEvent(QKeyEvent *evento)
 {
-//    if(evento->key() == Qt::Key_A){
-//        personaje->left();
-//        for(auto it=paredes2.begin();it!=paredes2.end();it++)
-//        {
-//            if(personaje->collidesWithItem(*it)){
-//                personaje->right();
-//            }
-//        }
-//    }
-//    else if(evento->key() == Qt::Key_D){
-//        personaje->right();
-//        for(auto it=paredes2.begin();it!=paredes2.end();it++)
-//        {
-//            if(personaje->collidesWithItem(*it)){
-//                personaje->left();
-//            }
-//        }
-//    }
     if(evento->key() == Qt::Key_A){
         personaje->left();
         personaje->setRotation(180);
@@ -187,12 +178,20 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
             if(personaje->collidesWithItem(monedas.at(i))){
                 scene->removeItem(monedas.at(i));
                 monedas.removeAt(i);
+                puntaje->increase();
             }
         }
-        if(personaje->collidesWithItem(gosht))
-        {
-            qDebug() <<"PERSONAJE PERDIO ";
-        }
+//        if(personaje->collidesWithItem(gosht))
+//        {
+//            gosht->setPosx(250);
+//            gosht->setPosy(280);
+
+//            personaje->setPosx(20);
+//            personaje->setPosy(20);
+//            salud->decrease();
+//            qDebug() <<"PERSONAJE PERDIO ";
+//        }
+
     }
     else if(evento->key() == Qt::Key_D){
         personaje->right();
@@ -214,12 +213,9 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
             if(personaje->collidesWithItem(monedas.at(i))){
                 scene->removeItem(monedas.at(i));
                 monedas.removeAt(i);
+                puntaje->increase();
             }
-        }
-        if(personaje->collidesWithItem(gosht))
-        {
-            qDebug() <<"PERSONAJE PERDIO ";
-        }
+        }       
     }
     else if(evento->key() == Qt::Key_W)
     {
@@ -237,11 +233,8 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
             if(personaje->collidesWithItem(monedas.at(i))){
                 scene->removeItem(monedas.at(i));
                 monedas.removeAt(i);
+                puntaje->increase();
             }
-        }
-        if(personaje->collidesWithItem(gosht))
-        {
-            qDebug() <<"PERSONAJE PERDIO ";
         }
     }
     else if(evento->key() == Qt::Key_S)
@@ -261,11 +254,8 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
             if(personaje->collidesWithItem(monedas.at(i))){
                 scene->removeItem(monedas.at(i));
                 monedas.removeAt(i);
+                puntaje->increase();
             }
-        }
-        if(personaje->collidesWithItem(gosht))
-        {
-            qDebug() <<"PERSONAJE PERDIO ";
         }
     }
 }
@@ -281,6 +271,23 @@ void MainWindow::moveEnemy()
                 gosht->left();
             }
         }
+
+        if(salud->getHealth()>0
+                )
+        {
+            if(gosht->collidesWithItem(personaje))
+            {
+                personaje->setPos(20,20);
+                personaje->setPosx(20);
+                personaje->setPosy(20);
+                salud->decrease();
+                qDebug() <<"PERSONAJE PERDIO ";
+            }
+        }
+        else
+        {
+            scene->removeItem(personaje);
+        }
     }
     else if(gosht->x() > personaje->x()){
         gosht->left();
@@ -289,6 +296,21 @@ void MainWindow::moveEnemy()
             if(gosht->collidesWithItem(*it)){
                 gosht->right();
             }
+        }
+        if(salud->getHealth()>0)
+        {
+            if(gosht->collidesWithItem(personaje))
+            {
+                personaje->setPos(20,20);
+                personaje->setPosx(20);
+                personaje->setPosy(20);
+                salud->decrease();
+                qDebug() <<"PERSONAJE PERDIO ";
+            }
+        }
+        else
+        {
+            scene->removeItem(personaje);
         }
     }
 
@@ -300,6 +322,23 @@ void MainWindow::moveEnemy()
                 gosht->up();
             }
         }
+
+        if(salud->getHealth()>0)
+        {
+            if(gosht->collidesWithItem(personaje))
+            {
+                personaje->setPos(20,20);
+                personaje->setPosx(20);
+                personaje->setPosy(20);
+                salud->decrease();
+                qDebug() <<"PERSONAJE PERDIO ";
+            }
+        }
+        else
+        {
+            scene->removeItem(personaje);
+        }
+
     }
     else if(gosht->y() > personaje->y()){
         gosht->up();
@@ -309,7 +348,25 @@ void MainWindow::moveEnemy()
                 gosht->down();
             }
         }
+        if(salud->getHealth()>0)
+        {
+            if(gosht->collidesWithItem(personaje))
+            {
+                personaje->setPos(20,20);
+                personaje->setPosx(20);
+                personaje->setPosy(20);
+                salud->decrease();
+                qDebug() <<"PERSONAJE PERDIO ";
+            }
+        }
+        else
+        {
+            scene->removeItem(personaje);
+        }
     }
+
+
+
     //gosht->setPos(gosht->posx(250),gosht->posy(280));
 
 }

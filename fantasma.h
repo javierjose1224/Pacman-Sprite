@@ -14,7 +14,7 @@ class fantasma:  public QObject, public QGraphicsItem
     Q_OBJECT
     int r;
     int posx=250, posy=280;
-    int velocidad = 1;
+    int velocidad = 2;
 
 public:
     explicit fantasma(QObject *parent = nullptr);

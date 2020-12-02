@@ -16,6 +16,8 @@
 #include "sprite.h"
 #include "moneda.h"
 #include "fantasma.h"
+#include "score.h"
+#include "health.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -38,12 +40,11 @@ private:
     QGraphicsScene *scene;
     QList<paredes *> paredes2;
     QList<moneda *> monedas;
+    Score *puntaje;
+    Health *salud;
     fantasma *gosht;
     sprite *personaje;
-    moneda *personaje2;
-    moneda *personaje3;
     QTimer *timer;
-    QTimer *timer2;
     float x,y,ancho,alto;
     void keyPressEvent(QKeyEvent * evento);
     void mover();

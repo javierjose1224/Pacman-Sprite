@@ -113,7 +113,6 @@ void sprite::move()
         if(typeid (*(colliding[i]))==typeid (this)){
             scene()->removeItem(colliding[i]);
             delete colliding[i];
-
         }
     }
 

@@ -8,6 +8,7 @@
 //    posy = y;
 //    setPos(posx,posy);
 //}
+
 fantasma::fantasma(QObject *parent) : QObject(parent)
 {
     timer =new QTimer();
@@ -17,7 +18,7 @@ fantasma::fantasma(QObject *parent) : QObject(parent)
     pixmap = new QPixmap(":/imagen/fantasmaReal.png");
 
     //dimensiones imagen
-    ancho = 100;
+    ancho = 80;
     alto = 100;
 
     timer->start(100);
