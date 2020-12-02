@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/imagen">
+        <file>pac2.png</file>
+        <file>images/PC Computer.png</file>
+        <file>fantasmaReal.png</file>
+    </qresource>
+</RCC>
