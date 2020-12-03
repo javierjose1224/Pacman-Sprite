@@ -31,7 +31,6 @@ void moneda::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
 {
     painter->drawPixmap(-ancho/2, -alto/2,*pixmap2,columnas,filas,ancho,alto);
     setScale(0.1);
-
 }
 
 //moneda::moneda(QObject *parent2) : QObject(parent2)

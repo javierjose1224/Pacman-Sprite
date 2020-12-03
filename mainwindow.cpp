@@ -21,6 +21,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->graphicsView->setScene(scene);
     personaje = new sprite();
 
+    textF= new finaltxt();
+    textF->setPos(60,240);
     puntaje= new Score();
     salud = new Health();
     scene->addItem(personaje);
@@ -36,6 +38,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 
 {
+
 paredes2.append(new paredes(20,220,20,20));//left up
 paredes2.append(new paredes(20,240,20,-360));//left down
 
@@ -126,24 +129,56 @@ paredes2.append(new paredes(20,100,-260,20));//up
     paredes2.append(new paredes(20,80,-320,-240));
 }
 
-    for(int i=20;i<540;i=i+20)
-    {
-        for(int j=20;j<600;j=j+20)
-        {
-            monedas.append(new moneda(10,10,i,j));
-        }
-    }
-
-//    for(int i=0;i<monedas.size();i++)
-//    {
-//        for(int j=0;j<paredes2.size();j++)
-//        {
-//            if(monedas.at(i)->collidesWithItem(paredes2.at(j)))
-//            {
-//                monedas.removeAt(i);
-//            }
-//        }
-//    }
+{
+    monedas.append(new moneda(-35,-35,25,60));
+    monedas.append(new moneda(-35,-35,25,100));
+    monedas.append(new moneda(-35,-35,25,140));
+    monedas.append(new moneda(-35,-35,55,160));
+    monedas.append(new moneda(-35,-35,85,160));
+    monedas.append(new moneda(-35,-35,55,100));
+    monedas.append(new moneda(-35,-35,85,100));
+    monedas.append(new moneda(-35,-35,120,60));
+    monedas.append(new moneda(-35,-35,120,100));
+    monedas.append(new moneda(-35,-35,120,140));
+    monedas.append(new moneda(-35,-35,120,180));
+    monedas.append(new moneda(-35,-35,120,220));
+    monedas.append(new moneda(-35,-35,120,260));
+    monedas.append(new moneda(-35,-35,120,300));
+    monedas.append(new moneda(-35,-35,120,340));
+    monedas.append(new moneda(-35,-35,120,380));
+    monedas.append(new moneda(-35,-35,120,420));
+    monedas.append(new moneda(-35,-35,120,460));
+    monedas.append(new moneda(-35,-35,120,500));
+    monedas.append(new moneda(-35,-35,85,520));
+    monedas.append(new moneda(-35,-35,420,60));
+    monedas.append(new moneda(-35,-35,420,100));
+    monedas.append(new moneda(-35,-35,420,140));
+    monedas.append(new moneda(-35,-35,420,180));
+    monedas.append(new moneda(-35,-35,420,220));
+    monedas.append(new moneda(-35,-35,420,260));
+    monedas.append(new moneda(-35,-35,420,300));
+    monedas.append(new moneda(-35,-35,420,340));
+    monedas.append(new moneda(-35,-35,420,380));
+    monedas.append(new moneda(-35,-35,420,420));
+    monedas.append(new moneda(-35,-35,420,460));
+    monedas.append(new moneda(-35,-35,420,500));
+    monedas.append(new moneda(-35,-35,460,520));
+    monedas.append(new moneda(-35,-35,25,580));
+    monedas.append(new moneda(-35,-35,55,580));
+    monedas.append(new moneda(-35,-35,85,580));
+    monedas.append(new moneda(-35,-35,115,580));
+    monedas.append(new moneda(-35,-35,145,580));
+    monedas.append(new moneda(-35,-35,175,580));
+    monedas.append(new moneda(-35,-35,205,580));
+    monedas.append(new moneda(-35,-35,235,580));
+    monedas.append(new moneda(-35,-35,265,580));
+    monedas.append(new moneda(-35,-35,295,580));
+    monedas.append(new moneda(-35,-35,325,580));
+    monedas.append(new moneda(-35,-35,355,580));
+    monedas.append(new moneda(-35,-35,385,580));
+    monedas.append(new moneda(-35,-35,415,580));
+    monedas.append(new moneda(-35,-35,445,580));
+}
 
     timer = new QTimer();
     connect(timer,SIGNAL(timeout()),this,SLOT(moveEnemy()));
@@ -280,7 +315,12 @@ void MainWindow::moveEnemy()
         }
         else
         {
-            scene->removeItem(personaje);
+            scene->addItem(textF);
+            personaje->setPos(-100,-100);
+            personaje->setPosx(-100);
+            personaje->setPosy(-100);
+//            scene->removeItem(personaje);
+//            scene->addItem(textF);
         }
     }
     else if(gosht->x() > personaje->x()){
@@ -307,7 +347,12 @@ void MainWindow::moveEnemy()
         }
         else
         {
-            scene->removeItem(personaje);
+            scene->addItem(textF);
+            personaje->setPos(-100,-100);
+            personaje->setPosx(-100);
+            personaje->setPosy(-100);
+//            scene->removeItem(personaje);
+//            scene->addItem(textF);
         }
     }
 
@@ -336,7 +381,12 @@ void MainWindow::moveEnemy()
         }
         else
         {
-            scene->removeItem(personaje);
+            scene->addItem(textF);
+            personaje->setPos(-100,-100);
+            personaje->setPosx(-100);
+            personaje->setPosy(-100);
+//            scene->removeItem(personaje);
+//            scene->addItem(textF);
         }
 
     }
@@ -364,7 +414,11 @@ void MainWindow::moveEnemy()
         }
         else
         {
-            scene->removeItem(personaje);
+            scene->addItem(textF);
+            personaje->setPos(-100,-100);
+            personaje->setPosx(-100);
+            personaje->setPosy(-100);
+            //scene->removeItem(personaje);
         }
     }
 }

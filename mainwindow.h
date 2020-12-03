@@ -18,6 +18,7 @@
 #include "fantasma.h"
 #include "score.h"
 #include "health.h"
+#include "finaltxt.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -44,6 +45,7 @@ private:
     Health *salud;
     fantasma *gosht;
     //QList<fantasma *> fantasmas;
+    finaltxt *textF;
     sprite *personaje;
     QTimer *timer;
     float x,y,ancho,alto;
