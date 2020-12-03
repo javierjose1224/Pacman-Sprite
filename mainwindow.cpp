@@ -28,9 +28,9 @@ MainWindow::MainWindow(QWidget *parent)
     gosht = new fantasma();
     gosht->setPos(250,280);
     scene->addItem(gosht);
-    puntaje->setPos(-130,0);
+    puntaje->setPos(-140,0);
     scene->addItem(puntaje);
-    salud->setPos(-130,40);
+    salud->setPos(-140,40);
     scene->addItem(salud);
 
 
@@ -125,6 +125,7 @@ paredes2.append(new paredes(20,100,-260,20));//up
     paredes2.append(new paredes(20,80,-200,-240));
     paredes2.append(new paredes(20,80,-320,-240));
 }
+
     for(int i=20;i<540;i=i+20)
     {
         for(int j=20;j<600;j=j+20)
@@ -132,6 +133,17 @@ paredes2.append(new paredes(20,100,-260,20));//up
             monedas.append(new moneda(10,10,i,j));
         }
     }
+
+//    for(int i=0;i<monedas.size();i++)
+//    {
+//        for(int j=0;j<paredes2.size();j++)
+//        {
+//            if(monedas.at(i)->collidesWithItem(paredes2.at(j)))
+//            {
+//                monedas.removeAt(i);
+//            }
+//        }
+//    }
 
     timer = new QTimer();
     connect(timer,SIGNAL(timeout()),this,SLOT(moveEnemy()));
@@ -146,15 +158,6 @@ paredes2.append(new paredes(20,100,-260,20));//up
         scene->addItem(*it);
     }
 }
-
-//void MainWindow::mover(){
-//    for(auto it2=monedas.begin();it2!=monedas.end();it2++){
-//        if(personaje->collidesWithItem<monedas[it2]>){
-
-//        }
-//    }
-//}
-
 
 void MainWindow::keyPressEvent(QKeyEvent *evento)
 {
@@ -181,17 +184,6 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
                 puntaje->increase();
             }
         }
-//        if(personaje->collidesWithItem(gosht))
-//        {
-//            gosht->setPosx(250);
-//            gosht->setPosy(280);
-
-//            personaje->setPosx(20);
-//            personaje->setPosy(20);
-//            salud->decrease();
-//            qDebug() <<"PERSONAJE PERDIO ";
-//        }
-
     }
     else if(evento->key() == Qt::Key_D){
         personaje->right();
@@ -272,8 +264,7 @@ void MainWindow::moveEnemy()
             }
         }
 
-        if(salud->getHealth()>0
-                )
+        if(salud->getHealth()>0)
         {
             if(gosht->collidesWithItem(personaje))
             {
@@ -281,6 +272,9 @@ void MainWindow::moveEnemy()
                 personaje->setPosx(20);
                 personaje->setPosy(20);
                 salud->decrease();
+                gosht->setPos(250,280);
+                gosht->setPosx(250);
+                gosht->setPosy(280);
                 qDebug() <<"PERSONAJE PERDIO ";
             }
         }
@@ -305,6 +299,9 @@ void MainWindow::moveEnemy()
                 personaje->setPosx(20);
                 personaje->setPosy(20);
                 salud->decrease();
+                gosht->setPos(250,280);
+                gosht->setPosx(250);
+                gosht->setPosy(280);
                 qDebug() <<"PERSONAJE PERDIO ";
             }
         }
@@ -331,6 +328,9 @@ void MainWindow::moveEnemy()
                 personaje->setPosx(20);
                 personaje->setPosy(20);
                 salud->decrease();
+                gosht->setPos(250,280);
+                gosht->setPosx(250);
+                gosht->setPosy(280);
                 qDebug() <<"PERSONAJE PERDIO ";
             }
         }
@@ -356,6 +356,9 @@ void MainWindow::moveEnemy()
                 personaje->setPosx(20);
                 personaje->setPosy(20);
                 salud->decrease();
+                gosht->setPos(250,280);
+                gosht->setPosx(250);
+                gosht->setPosy(280);
                 qDebug() <<"PERSONAJE PERDIO ";
             }
         }
@@ -364,11 +367,6 @@ void MainWindow::moveEnemy()
             scene->removeItem(personaje);
         }
     }
-
-
-
-    //gosht->setPos(gosht->posx(250),gosht->posy(280));
-
 }
 
 MainWindow::~MainWindow()

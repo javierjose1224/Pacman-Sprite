@@ -9,7 +9,6 @@
 #include <QPainter>
 #include <QGraphicsScene>
 
-
 class sprite : public QObject, public QGraphicsItem
 {
     Q_OBJECT
@@ -20,6 +19,7 @@ class sprite : public QObject, public QGraphicsItem
 public:
     explicit sprite(QObject *parent = nullptr);
     sprite(int r_, int x, int y);//
+    ~sprite();
     QTimer * timer;
     QPixmap *pixmap;
     int getR() const;

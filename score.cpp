@@ -4,15 +4,15 @@
 Score::Score(QGraphicsItem *parent): QGraphicsTextItem(parent)
 {
     score = 0;
-    setPlainText(QString("Score: ")+ QString::number(score));
-    setDefaultTextColor(Qt::blue);
+    setPlainText(QString("Puntos: ")+ QString::number(score));
+    setDefaultTextColor(Qt::yellow);
     setFont(QFont("times",16));
 }
 
 void Score::increase()
 {
     score++;
-    setPlainText(QString("Score: ")+ QString::number(score));
+    setPlainText(QString("Puntos: ")+ QString::number(score));
 }
 
 int Score::getScore()

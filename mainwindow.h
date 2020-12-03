@@ -43,6 +43,7 @@ private:
     Score *puntaje;
     Health *salud;
     fantasma *gosht;
+    //QList<fantasma *> fantasmas;
     sprite *personaje;
     QTimer *timer;
     float x,y,ancho,alto;
